@@ -52,7 +52,7 @@ public class Exercise2Test extends PetDomainForKata
     @Tag("KATA")
     public void doAnyPeopleHaveCats()
     {
-        Predicate<Person> predicate = null; //replace null with a Predicate lambda which checks for PetType.CAT
+        Predicate<Person> predicate = person -> person.hasPet(PetType.CAT); //replace null with a Predicate lambda which checks for PetType.CAT
         Assertions.assertTrue(this.people.anySatisfy(predicate));
     }
 
@@ -61,7 +61,7 @@ public class Exercise2Test extends PetDomainForKata
     public void doAllPeopleHavePets()
     {
         Predicate<Person> predicate = Person::isPetPerson;
-        boolean result = true; //replace with a method call send to this.people that checks if all people have pets
+        boolean result = this.people.allSatisfy(predicate); //replace with a method call send to this.people that checks if all people have pets
         Assertions.assertFalse(result);
     }
 
@@ -69,7 +69,7 @@ public class Exercise2Test extends PetDomainForKata
     @Tag("KATA")
     public void howManyPeopleHaveCats()
     {
-        int count = 0;
+        int count = this.people.countWith(Person::hasPet,PetType.CAT);
         Assertions.assertEquals(2, count);
     }
 
@@ -77,7 +77,7 @@ public class Exercise2Test extends PetDomainForKata
     @Tag("KATA")
     public void findMarySmith()
     {
-        Person result = null;
+        Person result = this.people.detect(person -> person.named("Mary Smith"));
         Assertions.assertEquals("Mary", result.getFirstName());
         Assertions.assertEquals("Smith", result.getLastName());
     }
@@ -86,7 +86,7 @@ public class Exercise2Test extends PetDomainForKata
     @Tag("KATA")
     public void getPeopleWithPets()
     {
-        MutableList<Person> petPeople = this.people; // replace with only the pet owners
+        MutableList<Person> petPeople = this.people.select(Person::isPetPerson); // replace with only the pet owners
         Verify.assertSize(7, petPeople);
     }
 
