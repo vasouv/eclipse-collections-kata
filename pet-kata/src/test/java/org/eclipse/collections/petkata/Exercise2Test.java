@@ -95,7 +95,7 @@ public class Exercise2Test extends PetDomainForKata
     public void getAllPetTypesOfAllPeople()
     {
         Function<Person, Iterable<PetType>> function = Person::getPetTypes;
-        MutableSet<PetType> petTypes = null;
+        MutableSet<PetType> petTypes = this.people.flatCollect(function,Sets.mutable.empty());
 
         var expectedSet = Sets.mutable.with(PetType.CAT, PetType.DOG, PetType.TURTLE, PetType.HAMSTER, PetType.BIRD, PetType.SNAKE);
         Assertions.assertEquals(expectedSet, petTypes);
