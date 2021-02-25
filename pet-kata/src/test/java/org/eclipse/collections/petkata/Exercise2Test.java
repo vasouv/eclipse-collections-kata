@@ -119,7 +119,7 @@ public class Exercise2Test extends PetDomainForKata
         Assertions.assertTrue(peopleHaveCatsLambda);
 
         //use method reference, NOT lambdas, to solve the problem below
-        boolean peopleHaveCatsMethodRef = false;
+        boolean peopleHaveCatsMethodRef = this.people.anySatisfyWith(Person::hasPet,PetType.CAT);
         Assertions.assertTrue(peopleHaveCatsMethodRef);
     }
 
@@ -131,7 +131,7 @@ public class Exercise2Test extends PetDomainForKata
         Assertions.assertFalse(peopleHaveCatsLambda);
 
         //use method reference, NOT lambdas, to solve the problem below
-        boolean peopleHaveCatsMethodRef = true;
+        boolean peopleHaveCatsMethodRef = this.people.allSatisfyWith(Person::hasPet,PetType.CAT);
         Assertions.assertFalse(peopleHaveCatsMethodRef);
     }
 
@@ -140,7 +140,7 @@ public class Exercise2Test extends PetDomainForKata
     public void getPeopleWithCatsRefactor()
     {
         //use method reference, NOT lambdas, to solve the problem below
-        MutableList<Person> peopleWithCatsMethodRef = null;
+        MutableList<Person> peopleWithCatsMethodRef = this.people.selectWith(Person::hasPet,PetType.CAT);
         Verify.assertSize(2, peopleWithCatsMethodRef);
     }
 
@@ -149,7 +149,7 @@ public class Exercise2Test extends PetDomainForKata
     public void getPeopleWithoutCatsRefactor()
     {
         //use method reference, NOT lambdas, to solve the problem below
-        MutableList<Person> peopleWithoutCatsMethodRef = null;
+        MutableList<Person> peopleWithoutCatsMethodRef = this.people.rejectWith(Person::hasPet,PetType.CAT);
         Verify.assertSize(6, peopleWithoutCatsMethodRef);
     }
 }
