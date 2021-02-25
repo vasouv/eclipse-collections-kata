@@ -105,7 +105,7 @@ public class Exercise2Test extends PetDomainForKata
     @Tag("KATA")
     public void getFirstNamesOfAllPeople()
     {
-        MutableList<String> firstNames = null;  // Transform this.people into a list of first names
+        MutableList<String> firstNames = this.people.collect(Person::getFirstName);  // Transform this.people into a list of first names
 
         var expectedList = Lists.mutable.with("Mary", "Bob", "Ted", "Jake", "Barry", "Terry", "Harry", "John");
         Assertions.assertEquals(expectedList, firstNames);
