@@ -13,6 +13,7 @@ package org.eclipse.collections.petkata;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
@@ -69,7 +70,7 @@ public class Exercise3Test extends PetDomainForKata
         Assertions.assertEquals(Integer.valueOf(1), petTypeCounts.get(PetType.BIRD));
 
         // Hint: use the appropriate method on this.people to create a Bag<PetType>
-        Bag<PetType> counts = null;
+        Bag<PetType> counts = this.people.flatCollect(Person::getPetTypes, Bags.mutable.empty());
         Assertions.assertEquals(2, counts.occurrencesOf(PetType.CAT));
         Assertions.assertEquals(2, counts.occurrencesOf(PetType.DOG));
         Assertions.assertEquals(2, counts.occurrencesOf(PetType.HAMSTER));
@@ -98,7 +99,7 @@ public class Exercise3Test extends PetDomainForKata
         Verify.assertIterableSize(3, lastNamesToPeople.get("Smith"));
 
         // Hint: use the appropriate method on this.people to create a Multimap<String, Person>
-        Multimap<String, Person> byLastNameMultimap = null;
+        Multimap<String, Person> byLastNameMultimap = this.people.groupBy(Person::getLastName);
 
         Verify.assertIterableSize(3, byLastNameMultimap.get("Smith"));
     }
